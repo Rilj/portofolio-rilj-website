@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jibril's</title>
+    <link rel="icon" href="../assets/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+                } else {
+                entry.target.classList.remove('show');
+                }
+            });
+            });
+
+            document.querySelectorAll('.hidden')
+            .forEach(el => observer.observe(el));
+        });
+    </script>
+    <script>
+        var TxtType = function(el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+
+        TxtType.prototype.tick = function() {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+
+            if (this.isDeleting) {
+            this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+            this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+
+            this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+            var that = this;
+            var delta = 200 - Math.random() * 100;
+
+            if (this.isDeleting) { delta /= 2; }
+
+            if (!this.isDeleting && this.txt === fullTxt) {
+            delta = this.period;
+            this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+            this.isDeleting = false;
+            this.loopNum++;
+            delta = 500;
+            }
+
+            setTimeout(function() {
+            that.tick();
+            }, delta);
+        };
+
+        window.onload = function() {
+            var elements = document.getElementsByClassName('typewrite');
+            for (var i=0; i<elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-type');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                new TxtType(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff; heigh:100% }";
+            document.body.appendChild(css);
+        };
+    </script>
+    <style>
+        body{
+            font-family: "Jersey 10", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            padding: 0;
+            margin: 0;
+            width: 100vw;
+            background: #000000;
+            overflow-x: hidden;
+            font-optical-sizing: auto;
+            font-style: normal;
+        }
+        .navbar{
+            top: 0;
+            display: flex;
+            width: 100%;
+            height: 6vh;
+            align-items: center;
+            position:sticky;
+        }
+        .home{
+            display: flex;
+            width: 20%;
+            height: 100%;
+            margin-left: 2%;
+            align-items: center;
+        }
+        .home a {
+            font-size: 4vh;
+            text-decoration: none;
+            color: #ff0000;
+            transition: 0.75s;
+        }
+        .otherpage{
+            width: 80%;
+            height: 100%;
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+        }
+        .otherpage a {
+            margin-right: 3%;
+            font-size: 4vh;
+            text-decoration: none;
+            color: #ffffff;
+            transition: 0.75s;
+        }
+        .welcome{
+            height: 70vh;
+            width: 85vw;
+            justify-self: center;
+            align-items: center;
+            display: flex;
+            margin-top: 10vh;
+        }
+        .text{
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .text h1{
+            margin-left: 5%;
+        }
+        .hello{
+            color: transparent;
+            -webkit-text-stroke: 0.001em #ff0000;
+            margin: 0%;
+            font-size: 5vw;
+        }
+        .im{
+            color: transparent;
+            -webkit-text-stroke: 0.001em #ffffff;
+            margin: 0%;
+            font-size: 5vw;
+        }
+        .me{
+            color: #ff0000;
+            margin: 0%;
+            font-size: 5vw;
+        }
+        .welcome img{
+            height: auto;
+            width: 30vw;
+            margin-left: 20%;
+        }
+        .introduction{
+            height: 70vh;
+            width: 85vw;
+            justify-self: center;
+            align-items: center;
+            display: flex;
+            margin-top: 12vh;
+        }
+        .introduction img{
+            height: auto;
+            width: 30vw;
+        }
+        .text1{
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .text1 div h1{
+            margin: 0;
+        }
+        .im1{
+            height: 10%;
+            width: 100%;
+            display: flex;
+            flex-direction: row-reverse;
+            color: transparent;
+            -webkit-text-stroke: 0.001em #ffffff;
+            margin-bottom: 10%;
+            font-size: 3vw;
+        }
+        .aw{
+            height: 10%;
+            width: 100%;
+            display: flex;
+            flex-direction: row-reverse;
+            color: transparent;
+            -webkit-text-stroke: 0.001em #ff0000;
+            margin: 0;
+            font-size: 3vw;
+        }
+        .wt{
+            height: 5%;
+            width: 100%;
+            display: flex;
+            flex-direction: row-reverse;
+            color: #ffffff;
+            margin: 0;
+            font-size: 2vw;
+            font-family: "Pixelify Sans", sans-serif;
+        }
+        .glow{
+            margin-top: 20%;
+            justify-self: center;
+            border-radius: 40px;
+            background: #ff0000;
+            width: 70%;
+            height: 60vh;
+            display: flex;
+            margin-bottom: 15%;
+            box-shadow: 0px 50px 100px 0px rgba(255, 0, 0, 0.25);
+        }
+        .card{
+            height: 97%;
+            width: 100%;
+            background: #0f0f0f;
+            border-radius: 36px;
+            display: flex;
+        }
+        .img{
+            height: 100%;
+            width: 35%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .img img{
+            height: auto;
+            width: 80%;
+            border-radius: 60px;
+        }
+        .text2{
+            width: 65%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #ffffff;
+            font-weight: 100;  
+            font-family: "Pixelify Sans", sans-serif;
+        }
+        .tw1{
+            height: 33.3%;
+            font-size: 2vw;
+            margin-bottom: 5%;
+        }
+        .tw2{
+            display: flex;
+            justify-content: center;
+            height: 33.33%;
+            font-size: 1vw;
+        }
+        .tw3{
+            display: flex;
+            flex-direction: row-reverse;
+            margin-right: 5%;
+            height: 33.33%;
+            font-size: 1vw;
+        }
+        .footer{
+            height: 5vh;
+            width: 100%;
+            background: #0f0f0f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            font-size: 2vh;
+            font-family: "Pixelify Sans", sans-serif;
+            position: absolute;
+        }
+        .footer img{
+            margin-right: 1%;
+        }
+        .home a:hover{
+            color: #7700ff;
+            transition: 0.75s;
+        }
+        .otherpage a:hover{
+            color: #ff0000;
+            transition: 0.75s;
+        }
+        .hidden {
+            opacity: 0;
+            scale: 0.5;
+            transition: all 0.5s;
+        } 
+        .show {
+            opacity: 1;
+            scale: 1;
+        }
+        @media (max-width: 629px) {
+            .navbar{
+                position: unset;
+            }
+            .welcome{
+                flex-direction: column;
+                width: 95vw;
+                height: 50vh;
+                margin-top: 5vh;
+            }
+            .otherpage{
+                margin-right: 3%;
+            }
+            .text{
+                width: 100%;
+            }
+            .welcome img{
+                margin-top: 1vh;
+                width: 80%;
+            }
+            .hello{
+                font-size: 10vw;
+            }
+            .im{
+                font-size: 10vw;  
+            }
+            .me{
+                font-size: 10vw;
+            }
+            .introduction{
+                margin-top: 0;
+                height: 20vh;
+            }
+            .glow{
+                height: 15vh;
+            }
+            .card img{
+                border-radius: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="home">
+            <a href="index.html">Jibril's</a>
+        </div>
+        <div class="otherpage">
+            <a href="Contact.html">Contact</a>
+            <a href="Project.html">Project</a>
+        </div>
+    </div>
+    <div class="welcome hidden">
+        <div class="text">
+            <h1 class="hello">HELLO WORLD,</h2>
+            <h1 class="im">I'M</h2>
+            <h1 class="me">Jibril Daulay</h2>
+        </div>
+        <img src="../assets/db.png" alt="dashboard">
+    </div>
+    <div class="introduction hidden">
+        <img src="../assets/hehe.png" alt="smily">
+        <div class="text1">
+            <div class="im1">               
+                <h1>I'M</h1>
+            </div>
+            <div class="aw">
+                <h1 class="A">A</h1>
+            </div>
+            <div class="wt">
+                <h1>
+                <p href="" class="typewrite" data-period="2000" data-type='[ "Programmer", "Game Developer", "3D Artist", "Jibril" ]'>
+                    <span class="wrap"></span>
+                </p>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="glow hidden">
+        <div class="card">
+            <div class="img">
+                <img src="../assets/profile.png" alt="jibrilja">
+            </div>
+            <div class="text2">
+                <div class="tw1">
+                    <h1>Jibril</h1>
+                </div>
+                <div class="tw2">
+                    <h1>
+                    <p href="" class="typewrite" data-period="2000" data-type='[ " The unpredictable person ", "A Creative Person", "A Learner Person", "The Explorer" ]'>
+                    </h1>
+                </div>
+                <div class="tw3">
+                    <h1>-  abid</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <img src="../assets/Copyright.png" alt="cpr">
+        <h3>Coppyright 2026-2029</h3>
+    </div>
+</body>
+</html>

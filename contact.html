@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jibril's</title>
+    <link rel="icon" href="../assets/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    <script>var TxtType = function(el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
+
+        TxtType.prototype.tick = function() {
+            var i = this.loopNum % this.toRotate.length;
+            var fullTxt = this.toRotate[i];
+
+            if (this.isDeleting) {
+            this.txt = fullTxt.substring(0, this.txt.length - 1);
+            } else {
+            this.txt = fullTxt.substring(0, this.txt.length + 1);
+            }
+
+            this.el.innerHTML = '<span class="wrap">'+this.txt+'</span>';
+
+            var that = this;
+            var delta = 200 - Math.random() * 100;
+
+            if (this.isDeleting) { delta /= 2; }
+
+            if (!this.isDeleting && this.txt === fullTxt) {
+            delta = this.period;
+            this.isDeleting = true;
+            } else if (this.isDeleting && this.txt === '') {
+            this.isDeleting = false;
+            this.loopNum++;
+            delta = 500;
+            }
+
+            setTimeout(function() {
+            that.tick();
+            }, delta);
+        };
+
+        window.onload = function() {
+            var elements = document.getElementsByClassName('typewrite');
+            for (var i=0; i<elements.length; i++) {
+                var toRotate = elements[i].getAttribute('data-type');
+                var period = elements[i].getAttribute('data-period');
+                if (toRotate) {
+                new TxtType(elements[i], JSON.parse(toRotate), period);
+                }
+            }
+            // INJECT CSS
+            var css = document.createElement("style");
+            css.type = "text/css";
+            css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff; heigh:100% }";
+            document.body.appendChild(css);
+        };
+    </script>
+    <style>
+        body{
+            font-family: "Jersey 10", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            background: #000000;
+            overflow-x: hidden;
+            font-optical-sizing: auto;
+            font-style: normal;
+        }
+        .navbar{
+            top: 0;
+            display: flex;
+            width: 100%;
+            height: 6vh;
+            align-items: center;
+            position:sticky;
+        }
+        .home{
+            display: flex;
+            width: 20%;
+            height: 100%;
+            margin-left: 2%;
+            align-items: center;
+        }
+        .home a {
+            font-size: 4vh;
+            text-decoration: none;
+            color: #ff0000;
+            transition: 0.75s;
+        }
+        .otherpage{
+            width: 80%;
+            height: 100%;
+            display: flex;
+            flex-direction: row-reverse;
+            align-items: center;
+        }
+        .otherpage a {
+            margin-right: 3%;
+            font-size: 4vh;
+            text-decoration: none;
+            color: #ffffff;
+            transition: 0.75s;
+        }
+        .pack{
+            margin-top: 10vh;
+            justify-self: center;
+            width: 95vw;
+            display: flex;
+            justify-content: center;
+        }
+        .cont{
+            display: flex;
+            flex-direction: column;
+            width: 30%;
+        }
+        .medsos{
+            display: flex;
+            margin-bottom: 1%;
+            text-decoration: none;
+        }
+        .ip{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .ip img{
+            width: 60%;
+            height: fit-content;
+        }
+        .tp{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 2%;
+            font-size: 1.5vw;
+            color: #ffffff;
+            transition: 0.75s;
+        }
+        .photo{
+            display: flex;
+            flex-direction: row-reverse;
+            width: 40%;
+        }
+        .photo img{
+            border-radius: 50%;
+            width: 50%;
+            height: fit-content;
+        }
+        .skillset{
+            display: flex;
+            justify-self: center;
+            height: 6vh;
+            justify-content: center;
+            margin-top: 5vh;
+        }
+        .skillset img{
+            padding-left: 3%;
+            padding-right: 3%;
+
+        }
+        .footer{
+            height: 5vh;
+            width: 100%;
+            background: #0f0f0f;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            font-size: 2vh;
+            font-family: "Pixelify Sans", sans-serif;
+            position: absolute;
+            bottom: 0;
+        }
+        .footer img{
+            margin-right: 1%;
+        }
+        .home a:hover{
+            color: #7700ff;
+            transition: 0.75s;
+        }
+        .otherpage a:hover{
+            color: #ff0000;
+            transition: 0.75s;
+        }
+        .medsos .tp:hover{
+            color: #7700ff;
+            transition: 0.75s;
+        }
+        @media (max-width: 629px) {
+            .navbar{
+                position: unset;
+            }
+            .pack{
+                flex-direction: column;
+                flex-direction: column-reverse;
+                align-items: center;
+                margin-top: 3vh;
+            }
+            .photo{
+                justify-content: center;
+                margin-bottom: 6vh;
+                width: 55%;
+            }
+            .photo img{
+                width: 100%;
+                height: fit-content;
+            }
+            .cont{
+                width: 80%;
+            }
+            .medsos{
+                margin-bottom: 1vh;
+            }
+            .tp{
+                font-size: 4vw;
+            }
+            .skillset{
+                margin-top: 1vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="home">
+            <a href="index.html">Jibril's</a>
+        </div>
+        <div class="otherpage">
+            <a href="Contact.html">Contact</a>
+            <a href="Project.html">Project</a>
+        </div>
+    </div>
+    <div class="pack">
+        <div class="cont">
+            <a href="https://github.com/Rilj" class="medsos">
+                <div class="ip">
+                    <img src="../assets/Github.png" alt="medsos">
+                </div>
+                <div class="tp">
+                    <p>Rilj</p>
+                </div>
+            </a>
+            <a href="https://www.linkedin.com/in/ahmad-jibril-daulay-402422331/" class="medsos">
+                <div class="ip">
+                    <img src="../assets/linkedin.png" alt="medsos">
+                </div>
+                <div class="tp">
+                    <p>Ahmad Jibril Daulay</p>
+                </div>
+            </a>
+            <a href="https://www.instagram.com/jibrildly/" class="medsos">
+                <div class="ip">
+                    <img src="../assets/Instagram.png" alt="medsos">
+                </div>
+                <div class="tp">
+                    <p>@jibrildly</p>
+                </div>
+            </a>
+            <div href="" class="medsos">
+                <div class="ip">
+                    <img src="../assets/email.png" alt="medsos">
+                </div>
+                <div class="tp">
+                    <p> jibrildaulay@gmail.com</p>
+                </div>
+            </div>
+            <div href="" class="medsos">
+                <div class="ip">
+                    <img src="../assets/phone.png" alt="medsos">
+                </div>
+                <div class="tp">
+                    <p>+62 896 3588 9642</p>
+                </div>
+            </div>
+            <a href="https://www.tiktok.com/@star_vvvv" class="medsos">
+                <div class="ip">
+                    <img src="../assets/tiktok.png" alt="medsos">
+                </div>
+                <div class="tp">
+                    <p>@star_vvvv</p>
+                </div>
+            </a>
+        </div>
+        <div class="photo">
+            <img src="../assets/pp.jpg" alt="profile">
+        </div>
+    </div>
+    <div class="skillset"> 
+        <img src="../assets/unity.png" alt="skill">
+        <img src="../assets/html.png" alt="skill">
+        <img src="../assets/css.png" alt="skill">
+        <img src="../assets/js.png" alt="skill">
+        <img src="../assets/figma.png" alt="skill">
+    </div>
+    <div class="footer">
+        <img src="../assets/Copyright.png" alt="cpr">
+        <h3>Coppyright 2026-2029</h3>
+    </div>
+</body>
+</html>
